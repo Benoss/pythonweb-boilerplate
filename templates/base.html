@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <link rel="preload" as="script" href="{{ static('js/vendor.js') }}"/>
-  <link rel="preload" as="script" href="{{ static('js/main.js') }}"/>
-  <link rel="preload" as="style" href="{{ static('css/style.css') }}"/>
-  <title>Smart Health Monitoring Wristwatch</title>
-  <link rel="stylesheet" href="{{ static('css/style.css') }}"/>
-  <script src="{{ static('js/vendor.js') }}"></script>
-  <script src="{{ static('js/main.js') }}"></script>
-</head>
-<body class="antialiased text-gray-700 bg-gray-100">
-<div id="root">
-  {% include'partials/menu.html' %}
-  {% block content %}{% endblock %}
-</div>
-{% if DEBUG %}
-  <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
-{% endif %}
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="preload" as="script" href="{{ static('js/vendor.js') }}" />
+    <link rel="preload" as="script" href="{{ static('js/main.js') }}" />
+    <link rel="preload" as="style" href="{{ static('css/style.css') }}" />
+    <title>Python Boilerplate with</title>
+    <link rel="stylesheet" href="{{ static('css/style.css') }}" />
+    <script src="{{ static('js/vendor.js') }}"></script>
+    <script src="{{ static('js/main.js') }}"></script>
+  </head>
+  <body class="antialiased text-gray-700 bg-gray-100">
+    <div id="root">
+      {% include'partials/menu.html' %} {% block content %}{% endblock %}
+    </div>
+    {% if DEBUG %}
+    <script>
+      document.write('<script src="http://' + (location.host || "localhost").split(":")[0] + ':35729/livereload.js?snipver=1"></' + "script>");
+    </script>
+    {% endif %}
+  </body>
 </html>

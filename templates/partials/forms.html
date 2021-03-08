@@ -1,21 +1,22 @@
 {% macro input_text(label, value, size=1) %}
-<label class="block bg-gray-200 rounded-lg px-2 py-1 {% if size != 1 %}col-span-{{ size }}{% endif %}">
-  <span class="px-1 text-xs font-medium text-gray-500">{{ label }}</span>
-  <input type="text" class="px-1 py-0 font-medium block w-full text-gray-700 bg-gray-200 border-transparent
+  <label class="block bg-gray-200 rounded-lg px-2 py-1 {% if size != 1 %}col-span-{{ size }}{% endif %}">
+    <span class="px-1 text-xs font-medium text-gray-500">{{ label }}</span>
+    <input type="text" class="px-1 py-0 font-medium block w-full text-gray-700 bg-gray-200 border-transparent
   rounded focus:border-gray-500 focus:bg-white focus:ring-0" value="{{ value }}">
-</label>
+  </label>
 {% endmacro %}
 
 {% macro input_range(label, default_val=50, min=1, max=100, pre_text="", post_text="", size=1) %}
-<label class="block bg-gray-200 rounded-lg px-2 py-1 {% if size != 1 %}col-span-{{ size }}{% endif %}"
-       x-data="{ data: {{ default_val }} }">
-  <span class="px-1 text-xs font-medium text-gray-500">{{ label }}</span>
-  <div class="flex">
-    <div class="font-medium p-2">{{ min }}</div>
-    <input type="range" min="{{ min }}" max="{{ max }}" x-model="data"
-           class="px-1 py-0 w-full bg-gray-200 rounded " value="{{ default_val }}">
-    <div class="font-medium p-2">{{ max }}</div>
-  </div>
-  <div class="flex justify-center">{{ pre_text}}<div class='px-1' x-text="data">{{ default_val }}</div>{{ post_text }}</div>
-</label>
+  <label class="block bg-gray-200 rounded-lg px-2 py-1 {% if size != 1 %}col-span-{{ size }}{% endif %}"
+         x-data="{ data: {{ default_val }} }">
+    <span class="px-1 text-xs font-medium text-gray-500">{{ label }}</span>
+    <div class="flex">
+      <div class="font-medium p-2">{{ min }}</div>
+      <input type="range" min="{{ min }}" max="{{ max }}" x-model="data" class="px-1 py-0 w-full bg-gray-200 rounded "
+             value="{{ default_val }}">
+      <div class="font-medium p-2">{{ max }}</div>
+    </div>
+    <div class="flex justify-center">{{ pre_text }}
+      <div class='px-1' x-text="data">{{ default_val }}</div>{{ post_text }}</div>
+  </label>
 {% endmacro %}

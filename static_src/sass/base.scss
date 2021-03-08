@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    @variants responsive {
+        .text-shadow {
+          text-shadow: 2px 2px 4px grey;
+        }
+        .text-shadow-md {
+          text-shadow: 4px 4px 8px grey;
+        }
+        .text-shadow-lg {
+          text-shadow: 15px 15px 30px grey;
+        }
+        .text-shadow-none {
+          text-shadow: none;
+        }
+    }
+}

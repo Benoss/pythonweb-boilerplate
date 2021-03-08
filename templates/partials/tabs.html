@@ -1,0 +1,11 @@
+{% macro tab(link_list) %}
+    <nav class="flex mt-6 ml-16 cursor-pointer">
+    {% for name, url, active in link_list %}
+      {% if active %}
+        <a href="{{ url }}" class="py-2 pl-5 pr-10 -ml-4 font-medium text-gray-200 bg-blue-500 rounded-t-xl cursor-default">{{ name }}</a>
+      {% else %}
+        <a href="{{ url }}" class="py-2 pl-5 pr-10 -ml-4 font-medium bg-blue-300 rounded-t-xl border-l hover:bg-blue-400">{{ name }}</a>
+      {% endif %}
+    {% endfor %}
+    </nav>
+{% endmacro %}

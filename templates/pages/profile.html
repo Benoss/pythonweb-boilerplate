@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% from 'partials/tabs.html' import tab %}
+{% from 'partials/forms.html' import input_text, input_range %}
+
+{% block content %}
+  <div class="md:ml-24 flex flex-col h-screen p-4">
+    <h1 class="p-4 text-3xl font-medium text-shadow-md">Profile</h1>
+    {{ tab([
+        ("Subscription", "/subscription", False),
+        ("Billing Information", "/billing", True),
+        ("Invoices", "/invoices", False),
+      ]) }}
+    <div class="ml-2 rounded-3xl shadow-xl flex-grow bg-gray-50">
+      <h2 class="p-6 text-lg font-medium">Agency Profile</h2>
+      <div class="px-6 grid grid-cols-2 gap-4">
+        {{ input_text("Company Name", "Elite Model Management", 2) }}
+        {{ input_text("Country", "USA") }}
+        {{ input_text("Street Name", "Stanley Street") }}
+        {{ input_text("Street Number", "22") }}
+        {{ input_text("Postal Code", "1501") }}
+        {{ input_text("Contact Person (First Name)", "John") }}
+        {{ input_text("Contact Person (Last Name)", "van Moonscape") }}
+        {{ input_text("Phone Number", "+0001 883 392 324") }}
+        {{ input_text("Company Website", "www.elite.com") }}
+        {{ input_text("Email Address", "johny@elite.com") }}
+        {{ input_text("Password", "**********") }}
+        {{ input_range("How long should the Challenge run?",
+            default_val=35, min=5, max=60, post_text="days", size=2) }}
+      </div>
+    </div>
+  </div>
+{% endblock %}
