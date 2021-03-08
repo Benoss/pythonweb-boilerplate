@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import contextlib
+import glob
 import os
 import subprocess
 from typing import List
@@ -20,7 +21,32 @@ def rename_project(to_name: str, from_name: str = "boilerplate_backend", git_rem
     """
     rename the project to a new name, you can optionally set the git remote you want to go to
     """
-    return
+    to_name_underscore = to_name.replace("-", "_")
+    try:
+        os.rename(from_name.replace("-", "_"), to_name_underscore)
+    except FileNotFoundError:
+        pass
+
+    def replace_path(filepath: str):
+        print(filepath)
+        with open(filepath) as file:
+            s = file.read()
+        s = s.replace(from_name.replace("_", "-"), to_name.replace("_", "-"))
+        s = s.replace(from_name.replace("-", "_"), to_name_underscore)
+        with open(filepath, "w") as file:
+            file.write(s)
+
+    for filepath in glob.iglob('./*.*', recursive=True):
+        replace_path(filepath)
+
+    for filepath in glob.iglob(f'./{to_name_underscore}/**/*.py', recursive=True):
+        replace_path(filepath)
+
+    for filepath in glob.iglob(f'./templates/**/*.*', recursive=True):
+        replace_path(filepath)
+
+    for filepath in glob.iglob(f'./static_src/**/*.*', recursive=True):
+        replace_path(filepath)
 
 
 def execute_from_command_line(args: List[str]) -> None:
