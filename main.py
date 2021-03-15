@@ -27,8 +27,7 @@ def rename_project(to_name: str, from_name: str = "boilerplate_backend", git_rem
     except FileNotFoundError:
         pass
 
-    def replace_path(filepath: str):
-        print(filepath)
+    def replace_path(filepath: str) -> None:
         with open(filepath) as file:
             s = file.read()
         s = s.replace(from_name.replace("_", "-"), to_name.replace("_", "-"))
@@ -36,16 +35,16 @@ def rename_project(to_name: str, from_name: str = "boilerplate_backend", git_rem
         with open(filepath, "w") as file:
             file.write(s)
 
-    for filepath in glob.iglob('./*.*', recursive=True):
+    for filepath in glob.iglob("./*.*", recursive=True):
         replace_path(filepath)
 
-    for filepath in glob.iglob(f'./{to_name_underscore}/**/*.py', recursive=True):
+    for filepath in glob.iglob(f"./{to_name_underscore}/**/*.py", recursive=True):
         replace_path(filepath)
 
-    for filepath in glob.iglob(f'./templates/**/*.*', recursive=True):
+    for filepath in glob.iglob("./templates/**/*.*", recursive=True):
         replace_path(filepath)
 
-    for filepath in glob.iglob(f'./static_src/**/*.*', recursive=True):
+    for filepath in glob.iglob("./static_src/**/*.*", recursive=True):
         replace_path(filepath)
 
 

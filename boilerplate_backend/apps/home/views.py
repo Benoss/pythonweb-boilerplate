@@ -1,8 +1,7 @@
 from typing import Any, Dict
 
-from django.http import HttpRequest, HttpResponse, Http404
+from django.http import Http404, HttpRequest, HttpResponse
 from django.shortcuts import render
-
 
 # Create your views here.
 from django.template import TemplateDoesNotExist
@@ -21,6 +20,3 @@ async def async_page(request: HttpRequest, page: str) -> HttpResponse:
         return render(request, template_path, context)
     except TemplateDoesNotExist:
         raise Http404(f"Template: {template_path} does not exist")
-
-
-

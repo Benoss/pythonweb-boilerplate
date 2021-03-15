@@ -9,7 +9,7 @@ from jinja2 import Environment, FileSystemBytecodeCache
 
 
 def page_url(page_slug: str) -> Optional[str]:
-    return reverse('page', args=[page_slug])
+    return reverse("page", args=[page_slug])
 
 
 def is_current(url: str, request: HttpRequest) -> bool:
@@ -24,7 +24,8 @@ def environment(**options: Any) -> Environment:
     options["lstrip_blocks"] = True
     options["bytecode_cache"] = fsbc
     env = Environment(**options)
-    env.globals.update({"static": static, "url": reverse, "DEBUG": settings.DEBUG, "page_url": page_url, "is_current": is_current})
+    env.globals.update(
+        {"static": static, "url": reverse, "DEBUG": settings.DEBUG, "page_url": page_url, "is_current": is_current}
+    )
     env.globals.update(settings.TEMPLATE_ENVS)
     return env
-

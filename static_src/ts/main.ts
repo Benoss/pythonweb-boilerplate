@@ -39,9 +39,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
           }
         });
       },
-      {threshold: 1}
+      { threshold: 1 }
     );
     observer.observe(hamburger_menu);
   }
-
 });

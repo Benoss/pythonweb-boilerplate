@@ -3,7 +3,9 @@ from .base_settings import *  # noqa
 DEBUG = True
 ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 MIDDLEWARE[:0] = ["debug_toolbar.middleware.DebugToolbarMiddleware"]  # noqa
-INSTALLED_APPS[:0] = ["debug_toolbar",]  # noqa
+INSTALLED_APPS[:0] = [  # noqa
+    "debug_toolbar",
+]  # noqa
 
 SERVER_AUTO_RELOAD = True
 RUN_GULP = True
