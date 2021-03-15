@@ -9,7 +9,7 @@ SERVER_AUTO_RELOAD = True
 RUN_GULP = True
 
 try:
-    from .local_settings import *  # noqa
+    from .local import *  # noqa
 except ImportError:  # pragma: no cover
     import logging
     import random
@@ -21,4 +21,4 @@ except ImportError:  # pragma: no cover
     # Here you can write more to the local settings if needed
 
     logging.error(f"Could not find the local settings file{local_settings}, creating one with a new SECRET_KEY ...")
-    from .local_settings import *  # noqa
+    from .local import *  # noqa
