@@ -1,12 +1,9 @@
-django>3.1
+django>=3.2
 pydantic
-fastapi
+django-ninja
 jinja2
 tomlkit
 pyyaml
-aiofiles
-requests
-
 uvicorn[standard]
 httpx
 typer

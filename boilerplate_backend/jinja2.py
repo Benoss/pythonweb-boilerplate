@@ -9,7 +9,7 @@ from jinja2 import Environment, FileSystemBytecodeCache
 
 
 def page_url(page_slug: str) -> Optional[str]:
-    return reverse("page", args=[page_slug])
+    return reverse("home:page", args=[page_slug])
 
 
 def is_current(url: str, request: HttpRequest) -> bool:
@@ -19,7 +19,7 @@ def is_current(url: str, request: HttpRequest) -> bool:
 def environment(**options: Any) -> Environment:
     cache_path = Path("./cache/")
     cache_path.mkdir(exist_ok=True)
-    fsbc = FileSystemBytecodeCache(cache_path)
+    fsbc = FileSystemBytecodeCache(str(cache_path))
     options["trim_blocks"] = True
     options["lstrip_blocks"] = True
     options["bytecode_cache"] = fsbc

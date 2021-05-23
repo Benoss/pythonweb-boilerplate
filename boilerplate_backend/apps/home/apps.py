@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class HomeConfig(AppConfig):
-    name = "home"
+    name = "boilerplate_backend.apps.home"

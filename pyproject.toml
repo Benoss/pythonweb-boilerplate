@@ -25,11 +25,20 @@ exclude = '''/(
 line_length = 120
 skip = ["node_modules"]
 # run seed-isort-config to populate the known_third_party
-known_third_party = ["fastapi", "gcloud", "google", "pydantic", "pytz", "tests"]
+known_third_party = ["gcloud", "google", "pydantic", "pytz", "tests"]
 
 [tool.flakehell]
+extended_default_ignore=[]  # https://github.com/flakehell/flakehell/issues/10
+exclude = [
+    ".git",
+    "__pycache__",
+    "docs",
+    "manage.py",
+    "migrations",
+    "node_modules",
+]
 max_line_length = 120
-exclude = []
+show_source = true
 # format = "grouped"
 
 [tool.flakehell.plugins]
@@ -38,3 +47,6 @@ pyflakes = ["+*",]
 # enable everything that starts from `flake8-`
 "flake8-*" = ["+*"]
 mccabe = ["+*"]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "boilerplate_backend.settings.test"

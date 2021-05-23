@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-import contextlib
 import glob
 import os
 import subprocess
@@ -94,22 +93,12 @@ def update() -> None:
 @app.command()
 def web() -> None:
     """
-    Run the webserver as well as gulp in the background if in DEBUG
+    Run the webserver with runserver if debug and Uvicorn async if not debug
     """
-    import logging
-
     from django.conf import settings
 
     if settings.DEBUG and settings.SERVER_AUTO_RELOAD:
-        with contextlib.ExitStack() if not settings.RUN_GULP else subprocess.Popen("gulp"):  # type: ignore
-            logging.info("Running asgi in DEBUG and AUTORELOAD")
-            uvicorn.run(
-                "asgi:app",
-                port=settings.SERVER_PORT,
-                reload=True,
-                host=settings.SERVER_HOST,
-                reload_dirs=["boilerplate_backend/"],
-            )
+        execute_from_command_line(["runserver"])
     else:
         from asgi import app as asgi_app
 

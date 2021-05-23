@@ -3,12 +3,16 @@
 django-debug-toolbar
 
 # Static analysis
+requests  # That's because some packages may try to fix the version of request
 pre-commit
-black >=20.8b1
+black >=21.5b1
 isort >= 5.6.2
 flakehell
 flake8-print  # Forbid print statement in code use logging. instead
 flake8-bugbear  # Catch common errors
 flake8-printf-formatting  # forbid %s use fstring instead
+mccabe
 mypy >= 0.812
 devtools
+pytest
+pytest-django
