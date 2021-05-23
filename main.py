@@ -46,6 +46,9 @@ def rename_project(to_name: str, from_name: str = "boilerplate_backend", git_rem
     for filepath in glob.iglob("./static_src/**/*.*", recursive=True):
         replace_path(filepath)
 
+    for filepath in glob.iglob("./.run/*.*", recursive=True):
+        replace_path(filepath)
+
 
 def execute_from_command_line(args: List[str]) -> None:
     try:
