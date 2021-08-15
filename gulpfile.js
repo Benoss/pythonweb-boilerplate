@@ -1,7 +1,7 @@
 "use strict";
 
 const gulp = require("gulp");
-const sass = require("gulp-sass");
+const sass = require("gulp-sass")(require("sass"));
 const postcss = require("gulp-postcss");
 const concat = require("gulp-concat");
 const cleanCSS = require("gulp-clean-css"); //To Minify CSS files
@@ -74,21 +74,19 @@ gulp.task("prod_styles", function () {
       // .pipe(sourcemaps.init())
       .pipe(sass().on("error", sass.logError))
       .pipe(
-        postcss([tailwindcss("tailwind.config.js"), require("autoprefixer")])
+        postcss([
+          tailwindcss("tailwind.config.prod.js"),
+          require("autoprefixer"),
+        ])
       )
-      .pipe(concat({ path: "style.css" }))
-      .pipe(
-        purgecss({
-          content: ["templates/**/*.{html,js}"],
-          defaultExtractor: (content) => {
-            const broadMatches = content.match(/[^<>"'`\s]*[^<>"'`\s:]/g) || [];
-            const innerMatches =
-              content.match(/[^<>"'`\s.()]*[^<>"'`\s.():]/g) || [];
-            return broadMatches.concat(innerMatches);
+            .pipe(
+        cleanCSS({
+          format: {
+            //   wrapAt: 999,
+            breaks: { afterRuleEnds: true },
           },
         })
       )
-      .pipe(cleanCSS())
       .pipe(gulp.dest(root_output + "css"))
   );
 });
@@ -106,6 +104,7 @@ gulp.task("watch", function () {
   gulp.watch(root_input + "sass/**/*.scss", gulp.parallel(["dev_styles"]));
   gulp.watch(root_input + "vendor/**/*.js", gulp.parallel(["dev_vendor"]));
   gulp.watch(root_input + "ts/**/*.ts", gulp.parallel(["dev_ts"]));
+  gulp.watch("tailwind.config.js").on("change", gulp.parallel(["dev_styles"]));
   gulp.watch("./templates/**/*.html").on("change", refresh.reload);
 });
 
