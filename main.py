@@ -49,6 +49,19 @@ def rename_project(to_name: str, from_name: str = "boilerplate_backend", git_rem
     for filepath in glob.iglob("./.run/*.*", recursive=True):
         replace_path(filepath)
 
+    if git_remote:
+        git_config_path = "./git/config"
+        new_lines = []
+        with open(git_config_path) as file:
+            for line in file.readlines():
+                if line.strip().startswith("url"):
+                    new_lines.append(f"        url = {git_remote}")
+                else:
+                    new_lines.append(line)
+
+        with open(git_config_path, "w") as file:
+            file.writelines(new_lines)
+
 
 def execute_from_command_line(args: List[str]) -> None:
     try:
