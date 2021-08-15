@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Dict, List
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-
+from django_jinja.builtins import DEFAULT_EXTENSIONS
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -61,11 +61,15 @@ TEMPLATES = [
         },
     },
     {
-        "BACKEND": "django.template.backends.jinja2.Jinja2",
+        "NAME": "jinja2",
+        "BACKEND": "django_jinja.backend.Jinja2",
         "DIRS": ["templates/"],
         "APP_DIRS": True,
         "OPTIONS": {
-            "environment": "boilerplate_backend.jinja2.environment",
+            "match_extension": ".html",
+            "match_regex": r"^(?!debug_toolbar/|admin/).*",
+            # "environment": "webui.django.jinja2.environment",
+            "extensions": DEFAULT_EXTENSIONS + ["boilerplate_backend.jinja2.CustomExtension"],
         },
     },
 ]
@@ -121,7 +125,6 @@ USE_L10N = False
 USE_TZ = True
 
 SERVER_PORT = os.environ.get("SERVER_PORT", 8080)
-SERVER_AUTO_RELOAD = True
 SERVER_HOST = "127.0.0.1"
 
 STATIC_URL = "/static/"

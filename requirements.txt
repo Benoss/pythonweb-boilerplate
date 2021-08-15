@@ -1,6 +1,7 @@
 django>=3.2
 pydantic
 django-ninja
+django-jinja
 jinja2>=3.0.0
 tomlkit
 pyyaml

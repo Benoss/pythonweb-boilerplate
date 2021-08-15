@@ -1,15 +1,14 @@
 from .base_settings import *  # noqa
+from boilerplate_backend.settings.base_settings import INSTALLED_APPS, MIDDLEWARE
 
 DEBUG = True
 ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
-MIDDLEWARE[:0] = ["debug_toolbar.middleware.DebugToolbarMiddleware"]  # noqa
-INSTALLED_APPS.extend(  # noqa
-    [
-        "debug_toolbar",
-    ]
-)  # noqa
+# This is required for Django debug toolbar
+INTERNAL_IPS = ["127.0.0.1", "localhost"]
 
-SERVER_AUTO_RELOAD = True
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+MIDDLEWARE[:0] = ["debug_toolbar.middleware.DebugToolbarMiddleware"]  # noqa
+INSTALLED_APPS += ["debug_toolbar"]
 
 try:
     from .local import *  # noqa
