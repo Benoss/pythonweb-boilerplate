@@ -79,7 +79,7 @@ gulp.task("prod_styles", function () {
           require("autoprefixer"),
         ])
       )
-            .pipe(
+      .pipe(
         cleanCSS({
           format: {
             //   wrapAt: 999,

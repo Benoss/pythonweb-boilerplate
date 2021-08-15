@@ -4,7 +4,7 @@ import glob
 import os
 import subprocess
 from typing import List
-
+import sys
 import typer
 import uvicorn
 
@@ -77,10 +77,13 @@ def release() -> None:
     Generate compressed css and javascript file and will also run collectstatic
     Feel free to add more to it if needed
     """
-    from django.core import management
 
-    subprocess.call(["gulp", "prod"])
-    management.call_command("collectstatic", "--no-input")
+    subprocess.check_call(["node_modules/.bin/gulp", "prod"])
+
+    subprocess.check_call(
+        [sys.executable, "manage.py", "collectstatic", "--no-input"],
+        env={"DJANGO_SETTINGS_MODULE": "boilerplate_backend.settings.prod", "DJANGO_SECRET_KEY": "not required"},
+    )
 
 
 @app.command()
